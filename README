@@ -1,0 +1,42 @@
+A command line interface specification language which can be used to parse args in a number of languages including c and bash.
+
+Is able to output tab completion specs for bash and zsh.
+Can be used to model existing interfaces with out rewriting them for doucmentation/tab completion purposes.
+
+Can auto generate manpage and --help
+
+Meant to encourage seemless transition from bash script prototype to implemented c program by having the interface defined externally.
+
+NOTE: this might become an entire parser/lexer component
+or maybe just a "restriction" on ppl's lexer
+
+Part of pirate-speak. A terminal programing revolution.
+
+yarrr - a yar compiler
+    default - input yar output a .h file which specifies arg parsing.
+    --completion <lang>: input yar output completion file for <shell>
+    --filetype <type>: yar, bash, c, etc. since you can embed yar in other lang's comments
+
+libyarrr - arg parsing, you link in a .h from yarrr, or you generate the symbols
+    functions:
+        - parse yar to YARCONF
+        - parse args using YARCONF
+
+yarg - the yarrr runtime parser 
+    yarg "spec" args...
+    sets env variables based on yar spec and args
+
+    ex) 
+        #!/bin/bash
+        yarg $0 $@ 
+    
+    or)
+        #!/bin/bash
+        source `yarg --bash`
+        
+        #~ ...
+        echo $blah
+
+    or) #!/usr/bin/yarg
+        #~ ...
+        echo $blah
